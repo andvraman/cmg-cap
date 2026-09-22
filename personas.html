@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<title>CMG Training Personas</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Domine:wght@400..700&family=Nunito+Sans:wght@400..800&display=swap">
+<style>
+  :root {
+    --ground: #FFFBF5; --panel: #F3E9DA; --ink: #12303D; --ink-2: #4A5565; --line: #D9CDB8;
+    --gov: #12435A; --partner: #A84B25; --field: #4F6B3A; --watch: #B26A00; --on-c: #FFFBF5;
+    --display: 'Domine', Georgia, 'Times New Roman', serif; --body: 'Nunito Sans', 'Segoe UI', Arial, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+    --ground: #0F2530; --panel: #17333F; --ink: #F3E9DA; --ink-2: #A9B8BF; --line: #2C4A57;
+    --gov: #8CC0D6; --partner: #E69670; --field: #A9C98F; --watch: #E6B25A; --on-c: #0F2530; } }
+  :root[data-theme="dark"] {
+    --ground: #0F2530; --panel: #17333F; --ink: #F3E9DA; --ink-2: #A9B8BF; --line: #2C4A57;
+    --gov: #8CC0D6; --partner: #E69670; --field: #A9C98F; --watch: #E6B25A; --on-c: #0F2530; }
+
+  * { box-sizing: border-box; }
+  body { background: var(--ground); color: var(--ink); font-family: var(--body); font-size: 16px; line-height: 1.45; }
+  .page { max-width: 1240px; margin-inline: auto; padding-inline: 24px; padding-block: 28px 20px; display: flex; flex-direction: column; gap: 22px; }
+  .eyebrow { margin: 0; font-size: 13px; font-weight: 800; letter-spacing: .16em; color: var(--partner); }
+  .top { display: flex; flex-direction: column; gap: 8px; }
+  .top::before { content: ''; width: 64px; height: 5px; border-radius: 3px; background: var(--partner); }
+  h1 { margin: 0; font-family: var(--display); font-size: clamp(28px, 4vw, 44px); line-height: 1.12; font-weight: 700; text-wrap: balance; }
+  .lede { margin: 0; max-width: 65ch; color: var(--ink-2); font-size: 17px; }
+
+  /* ---- the stage: planets round a sun, and the success box beside it ---- */
+  .stage { --c: var(--gov); display: grid; gap: 28px; align-items: center; }
+  .orbit { display: flex; flex-direction: column; gap: 12px; }
+  .orbit svg.rings { display: none; }
+  .sun { align-self: flex-start; display: flex; align-items: center; gap: 14px; padding: 14px 22px 14px 16px; border-radius: 999px; background: var(--c); color: var(--on-c); }
+  .sun svg { width: 34px; height: 34px; flex: none; }
+  .sun b { font-family: var(--display); font-size: 20px; line-height: 1.15; }
+  .planet { display: flex; align-items: center; gap: 14px; animation: arrive .45s cubic-bezier(.2,.8,.2,1) both; animation-delay: calc(var(--i) * 55ms); }
+  .planet .ball { flex: none; width: 56px; height: 56px; border-radius: 50%; display: grid; place-items: center; background: var(--panel); border: 2.5px solid var(--c); color: var(--c); }
+  .planet .ball svg { width: 26px; height: 26px; }
+  .planet span { font-weight: 700; font-size: 16px; line-height: 1.25; }
+  @keyframes arrive { from { opacity: 0; } to { opacity: 1; } }
+
+  @media (min-width: 760px) {
+    .orbit { position: relative; display: block; width: min(100%, 640px); aspect-ratio: 64 / 57; margin-inline: auto; }
+    .orbit svg.rings { display: block; position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+    .rings ellipse { fill: none; stroke: var(--line); stroke-width: 2; vector-effect: non-scaling-stroke; }
+    .rings .path { stroke: var(--c); stroke-opacity: .55; stroke-dasharray: 3 9; stroke-linecap: round; stroke-width: 3; animation: drift 40s linear infinite; }
+    @keyframes drift { to { stroke-dashoffset: -240; } }
+    .sun { position: absolute; left: 50%; top: 47%; transform: translate(-50%, -50%); width: 27%; aspect-ratio: 1; flex-direction: column; justify-content: center; gap: 6px; padding: 12px; text-align: center; border-radius: 50%; box-shadow: 0 0 0 10px color-mix(in srgb, var(--c) 16%, transparent), 0 0 0 22px color-mix(in srgb, var(--c) 8%, transparent); }
+    .sun svg { width: 40px; height: 40px; }
+    .sun b { font-size: clamp(15px, 1.7vw, 19px); }
+    .planet { position: absolute; left: var(--x); top: var(--y); transform: translate(-50%, -30px); width: 156px; flex-direction: column; gap: 6px; text-align: center; animation-name: launch; }
+    .planet .ball { width: 60px; height: 60px; }
+    .planet span { font-size: 15px; padding: 2px 6px; border-radius: 8px; background: var(--ground); }
+    @keyframes launch { from { left: 50%; top: 47%; opacity: 0; } to { left: var(--x); top: var(--y); opacity: 1; } }
+  }
+  @media (min-width: 1020px) { .stage { grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); } }
+
+  .side { display: flex; flex-direction: column; gap: 16px; min-width: 0; }
+  .side h2 { margin: 0; font-family: var(--display); font-size: clamp(24px, 3vw, 34px); line-height: 1.12; text-wrap: balance; }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 0; padding: 0; list-style: none; }
+  .chips li { padding: 4px 12px; border-radius: 999px; font-size: 11px; font-weight: 800; letter-spacing: .04em; border: 2px solid var(--c); color: var(--c); }
+  .chips li:first-child { background: var(--c); color: var(--on-c); }
+  .label { margin: 0 0 4px; font-size: 10.5px; font-weight: 800; letter-spacing: .16em; }
+  .goal .label { color: var(--ink-2); }
+  .goal p:last-child { margin: 0; font-size: 16px; max-width: 46ch; }
+  .success { padding: 22px 24px; border-radius: 18px; background: var(--c); color: var(--on-c); }
+  .success .label { opacity: .85; font-size: 9.5px; }
+  .success p.words { margin: 0; font-family: var(--display); font-size: clamp(14px, 1.6vw, 16px); line-height: 1.4; }
+  .success p.note { margin: 10px 0 0; font-size: 11.5px; opacity: .85; }
+
+  /* ---- the procession ---- */
+  .strip { position: sticky; bottom: 0; background: var(--panel); border-top: 2px solid var(--line); padding: 10px 12px calc(10px + env(safe-area-inset-bottom, 0px)); }
+  .strip-in { max-width: 1240px; margin-inline: auto; display: flex; align-items: center; gap: 8px; }
+  .nudge { flex: none; width: 44px; height: 44px; border-radius: 50%; border: 2px solid var(--ink); background: var(--ground); color: var(--ink); display: grid; place-items: center; cursor: pointer; }
+  .nudge svg { width: 22px; height: 22px; }
+  .nudge:hover { background: var(--ink); color: var(--ground); }
+  .scroller { position: relative; flex: 1; min-width: 0; overflow-x: auto; scroll-snap-type: x proximity; scrollbar-width: thin; scrollbar-color: var(--line) transparent; }
+  .track { position: relative; display: flex; gap: 6px; width: max-content; min-width: 100%; justify-content: space-between; padding: 8px 10px 6px; }
+  .track::before { content: ''; position: absolute; left: 0; right: 0; top: 36px; height: 3px; background: var(--line); }
+  .who { --c: var(--gov); position: relative; scroll-snap-align: center; width: 136px; padding: 0 4px 4px; border: 0; background: none; color: var(--ink-2); font: inherit; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 6px; }
+  .who .disc { width: 58px; height: 58px; border-radius: 50%; display: grid; place-items: center; background: var(--ground); border: 3px solid var(--c); color: var(--c); transition: transform .2s, background .2s, color .2s; }
+  .who .disc svg { width: 28px; height: 28px; }
+  .who .name { font-size: 14px; font-weight: 700; line-height: 1.2; text-align: center; }
+  .who:hover .disc { transform: translateY(-2px); }
+  .who[aria-pressed="true"] { color: var(--ink); }
+  .who[aria-pressed="true"] .disc { background: var(--c); color: var(--on-c); transform: scale(1.14); box-shadow: 0 0 0 5px color-mix(in srgb, var(--c) 22%, transparent); }
+  .who[aria-pressed="true"] .name { font-weight: 800; }
+  .who[aria-pressed="true"]::after { content: ''; position: absolute; top: -8px; left: 50%; width: 0; height: 0; transform: translateX(-50%); border: 7px solid transparent; border-top: 0; border-bottom-color: var(--c); }
+  button:focus-visible { outline: 3px solid var(--watch); outline-offset: 3px; border-radius: 12px; }
+  .legend { max-width: 1240px; margin: 6px auto 0; padding: 0 56px; display: flex; flex-wrap: wrap; gap: 4px 18px; font-size: 13px; color: var(--ink-2); list-style: none; }
+  .legend li { display: flex; align-items: center; gap: 6px; }
+  .legend i { width: 12px; height: 12px; border-radius: 50%; background: var(--c); }
+  @media (max-width: 560px) { .nudge { display: none; } .legend { padding: 0 8px; } .who { width: 112px; } }
+  @media (prefers-reduced-motion: reduce) { .planet, .rings .path { animation: none; } .who .disc { transition: none; } }
+</style>
+<style>html{padding-block:env(safe-area-inset-top,0px) env(safe-area-inset-bottom,0px)} body{margin:0} img{max-width:100%} [hidden]{display:none!important}</style>
+</head>
+<body>
+
+<div class="page">
+  <header class="top">
+    <p class="eyebrow">CMG TRAINING · MAFUNZO YA VIKUNDI</p>
+    <h1>Who does what, one person at a time</h1>
+    <p class="lede">Eight people carry a lesson from an author's desk to a village meeting and back. They stand below in the order the work reaches them. Choose one to see the few things that matter most in their job, and what success looks like for them.</p>
+  </header>
+
+  <main class="stage" id="stage" aria-live="polite">
+    <section class="orbit" id="orbit" aria-label="What this person does"></section>
+    <aside class="side">
+      <h2 id="p-name"></h2>
+      <ul class="chips" id="p-chips"></ul>
+      <div class="goal"><p class="label">THEIR GOAL</p><p id="p-goal"></p></div>
+      <div class="success"><p class="label">SUCCESS FOR THIS USER MEANS</p><p class="words" id="p-success"></p><p class="note" id="p-note" hidden></p></div>
+    </aside>
+  </main>
+</div>
+
+<nav class="strip" aria-label="The procession of personas">
+  <div class="strip-in">
+    <button class="nudge" id="prev" type="button" aria-label="Previous person"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></button>
+    <div class="scroller" id="scroller"><div class="track" id="track"></div></div>
+    <button class="nudge" id="next" type="button" aria-label="Next person"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg></button>
+  </div>
+  <ul class="legend">
+    <li style="--c:var(--gov)"><i></i>TAMISEMI</li><li style="--c:var(--partner)"><i></i>BDS partner</li>
+    <li style="--c:var(--field)"><i></i>In the field</li><li style="--c:var(--watch)"><i></i>Monitors</li>
+    <li>Arrow keys move along the line</li>
+  </ul>
+</nav>
+
+<script>
+const ICON = {
+  key: '<circle cx="8" cy="15" r="4"/><path d="M11 12l9-9M16 7l3 3M14 9l2 2"/>',
+  book: '<path d="M12 6c-2-1.5-5-2-8-2v14c3 0 6 .5 8 2 2-1.5 5-2 8-2V4c-3 0-6 .5-8 2zM12 6v14"/>',
+  home: '<path d="M3 11l9-7 9 7M5 10v10h14V10M10 20v-6h4v6"/>',
+  calendar: '<path d="M4 6h16v14H4zM4 10h16M8 3v4M16 3v4"/>',
+  search: '<circle cx="11" cy="11" r="6"/><path d="M16 16l5 5"/>',
+  plane: '<path d="M21 3L3 10l7 3 3 7zM10 13l5-5"/>',
+  cap: '<path d="M2 9l10-5 10 5-10 5zM6 11v5c2 2 10 2 12 0v-5M22 9v6"/>',
+  chart: '<path d="M3 20h18M6 20v-8M11 20V5M16 20v-11M21 20v-5"/>',
+  userplus: '<circle cx="9" cy="8" r="4"/><path d="M2 20c0-4 3-6 7-6s7 2 7 6M19 7v6M16 10h6"/>',
+  users: '<circle cx="9" cy="8" r="3.5"/><path d="M2 20c0-4 3-6 7-6s7 2 7 6"/><circle cx="17" cy="9" r="2.5"/><path d="M17 14c3 0 5 2 5 5"/>',
+  map: '<path d="M9 4L3 6v14l6-2 6 2 6-2V4l-6 2zM9 4v14M15 6v14"/>',
+  sliders: '<path d="M4 7h10M18 7h2M4 17h2M10 17h10"/><circle cx="16" cy="7" r="2"/><circle cx="8" cy="17" r="2"/>',
+  grid: '<path d="M4 4h7v7H4zM13 4h7v7h-7zM4 13h7v7H4zM13 13h7v7h-7z"/>',
+  list: '<path d="M8 6h12M8 12h12M8 18h12M4 6h.01M4 12h.01M4 18h.01"/>',
+  layers: '<path d="M12 3l9 5-9 5-9-5zM3 13l9 5 9-5"/>',
+  upload: '<path d="M12 16V4M7 9l5-5 5 5M4 20h16"/>',
+  download: '<path d="M12 4v12M7 11l5 5 5-5M4 20h16"/>',
+  help: '<circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.7.4-1 1-1 1.7M12 17h.01"/>',
+  globe: '<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/>',
+  check: '<path d="M5 12l5 5 9-10"/>',
+  checkcircle: '<circle cx="12" cy="12" r="9"/><path d="M8 12l3 3 5-6"/>',
+  xcircle: '<circle cx="12" cy="12" r="9"/><path d="M9 9l6 6M15 9l-6 6"/>',
+  pen: '<path d="M4 20l4-1L20 7l-3-3L5 16zM14 6l3 3"/>',
+  swap: '<path d="M4 8h14l-3-3M20 16H6l3 3"/>',
+  printer: '<path d="M7 8V3h10v5M5 17H3V9h18v8h-2M7 14h10v7H7z"/>',
+  offline: '<path d="M3 3l18 18M5 12a10 10 0 0 1 4-2.5M19 12a10 10 0 0 0-5-2.8M8.5 15.5a5 5 0 0 1 7 0M12 19h.01"/>',
+  keyboard: '<path d="M3 7h18v10H3zM7 11h.01M11 11h.01M15 11h.01M8 14h8"/>',
+  award: '<circle cx="12" cy="9" r="5"/><path d="M9 13.5L8 21l4-2 4 2-1-7.5"/>',
+  eye: '<path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/>',
+  lock: '<path d="M6 11h12v9H6zM9 11V8a3 3 0 0 1 6 0v3"/>',
+  shield: '<path d="M12 3l7 3v5c0 4.5-3 8-7 10-4-2-7-5.5-7-10V6z"/>',
+  sample: '<path d="M19 5L5 19"/><circle cx="7" cy="7" r="2.5"/><circle cx="17" cy="17" r="2.5"/>',
+  trend: '<path d="M3 17l6-6 4 4 8-8M15 7h6v6"/>',
+  history: '<path d="M4 12a8 8 0 1 0 3-6.2M4 4v4h4M12 8v4l3 2"/>',
+};
+const svg = (n) => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICON[n]}</svg>`;
+
+// From docs/01-personas-and-roles.md: the core eight, their goal, the few things that matter most, and the spec's own success line.
+const PEOPLE = [
+  { name: 'Platform administrator', short: 'Administrator', icon: 'key', c: 'gov', chips: ['TAMISEMI', 'National', 'Access control'],
+    goal: 'Keep the platform running, control who has access, and see the national picture.',
+    does: [['userplus', 'Creates accounts and gives roles'], ['map', 'Sets up regions, districts and wards'], ['sliders', 'Sets the thresholds the rules use'], ['grid', 'Sees every region’s dashboard'], ['history', 'Reads the audit trail']],
+    success: 'Can answer “how many CMGs in Dodoma were trained on module X this quarter, and by whom” in under a minute.' },
+  { name: 'Content author', short: 'Content author', icon: 'book', c: 'gov', chips: ['TAMISEMI', 'Staff or consultant', 'English and Swahili'],
+    goal: 'Build and maintain the training curriculum in both languages.',
+    does: [['layers', 'Builds each module in short parts'], ['upload', 'Uploads text, audio and video'], ['help', 'Writes the quizzes'], ['globe', 'Checks the translations'], ['plane', 'Publishes new versions safely']],
+    success: 'Publishes an updated Swahili audio for one part of a module, and trainers in the field see the change on their next sync without fetching the rest again.' },
+  { name: 'District officer', short: 'District officer', icon: 'home', c: 'gov', chips: ['TAMISEMI', 'District council', 'Keeps the register'],
+    goal: 'Keep the district’s register of groups true: who exists, where, who leads them, and whether they are registered.',
+    does: [['users', 'Adds groups to the platform'], ['checkcircle', 'Records their registration'], ['swap', 'Changes a group’s status'], ['list', 'Keeps the member list'], ['key', 'Issues the chair’s and secretary’s accounts']],
+    success: 'When a coordinator wants to train a group, it is already on the platform, registered, in the right ward and village, with a chairperson who can sign.' },
+  { name: 'Delivery partner manager', short: 'Partner manager', icon: 'cap', c: 'partner', chips: ['BDS partner', 'National', 'Runs the trainer workforce'],
+    goal: 'Manage the trainer workforce and demonstrate delivery to the government.',
+    does: [['userplus', 'Registers new trainers'], ['book', 'Enrols them in train-the-trainer'], ['award', 'Certifies the trainers'], ['users', 'Sees workload and certifications'], ['xcircle', 'Sees which reports were rejected, and why']],
+    success: 'Can show the government a monthly delivery report per region without asking trainers to compile it by hand.' },
+  { name: 'District coordinator', short: 'The coordinator', icon: 'calendar', c: 'gov', chips: ['TAMISEMI', 'District', '“The coordinator”'],
+    goal: 'Get every group in the district trained on the full curriculum, on schedule, by certified trainers.',
+    does: [['chart', 'Plans six weeks of visits'], ['calendar', 'Schedules, reschedules, cancels'], ['checkcircle', 'Accepts or rejects reports'], ['map', 'Draws areas, appoints their coordinators'], ['shield', 'Covers for area coordinators']],
+    success: 'Every group in the district is trained on the full curriculum, on schedule, by certified trainers.' },
+  { name: 'Trainer', short: 'Trainer', icon: 'plane', c: 'field', chips: ['BDS partner', 'Village', 'Train CMGs'],
+    goal: 'Deliver sessions to groups well, and get them recorded with minimum paperwork.',
+    does: [['calendar', 'Sees upcoming sessions'], ['printer', 'Prints the session sheet and pack'], ['offline', 'Delivers on paper, no signal needed'], ['pen', 'Collects two members’ signatures'], ['keyboard', 'Types the report in afterwards']],
+    success: 'Leaves the office with everything printed and downloaded, and on return enters a session’s report from its sheet in under five minutes.' },
+  { name: 'Regional coordinator', short: 'Regional coordinator', icon: 'search', c: 'gov', chips: ['TAMISEMI', 'Region', 'Oversight and back-up'],
+    goal: 'Oversee the region’s districts, and be their back-up.',
+    does: [['check', 'Confirms trainer postings'], ['swap', 'Hands an area to the partner'], ['sample', 'Spot-checks 1 report in 20'], ['trend', 'Watches progress by area'], ['shield', 'Covers any district or area']],
+    success: 'Opens the regional calendar on Monday and sees exactly what is planned for the week, what slipped last week, and which reports need attention.' },
+  { name: 'Monitoring and evaluation officer', short: 'M&E officer', icon: 'chart', c: 'watch', chips: ['Monitors', 'Government or external', 'All regions'],
+    goal: 'Assess programme reach and effectiveness.',
+    does: [['eye', 'Reads everything'], ['download', 'Exports sessions and attendance'], ['help', 'Exports quiz results'], ['shield', 'Sees no personal data it does not need'], ['lock', 'Never edits a record']],
+    success: 'Can export a clean dataset of sessions and quiz outcomes for a date range and region.' },
+];
+
+const $ = (id) => document.getElementById(id);
+const esc = (s) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;');
+let current = 4;                                   // the coordinator: the person the rest of the system turns round
+
+$('track').innerHTML = PEOPLE.map((p, i) =>
+  `<button class="who" type="button" id="who-${i}" data-i="${i}" style="--c:var(--${p.c})" aria-pressed="false"><span class="disc">${svg(p.icon)}</span><span class="name">${esc(p.short)}</span></button>`).join('');
+
+function show(i, scroll = true) {
+  current = (i + PEOPLE.length) % PEOPLE.length; const p = PEOPLE[current], n = p.does.length;
+  $('stage').style.setProperty('--c', `var(--${p.c})`);
+  $('orbit').innerHTML = `<svg class="rings" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><ellipse cx="50" cy="47" rx="25" ry="24"/><ellipse class="path" cx="50" cy="47" rx="37" ry="36"/></svg>
+    <div class="sun">${svg(p.icon)}<b>${esc(p.short)}</b></div>` + p.does.map(([ic, words], k) => { const a = (-90 + k * 360 / n) * Math.PI / 180;
+      return `<div class="planet" style="--i:${k}; --x:${(50 + 37 * Math.cos(a)).toFixed(2)}%; --y:${(47 + 36 * Math.sin(a)).toFixed(2)}%"><div class="ball">${svg(ic)}</div><span>${esc(words)}</span></div>`; }).join('');
+  $('p-name').textContent = p.name; $('p-goal').textContent = p.goal; $('p-success').textContent = p.success;
+  $('p-note').hidden = !p.note; $('p-note').textContent = p.note || '';
+  $('p-chips').innerHTML = p.chips.map((c) => `<li>${esc(c)}</li>`).join('');
+  document.querySelectorAll('.who').forEach((b, k) => b.setAttribute('aria-pressed', String(k === current)));
+  if (scroll) { const s = $('scroller'), b = $(`who-${current}`);
+    s.scrollTo({ left: b.offsetLeft - (s.clientWidth - b.offsetWidth) / 2, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' }); }
+}
+
+$('track').addEventListener('click', (e) => { const b = e.target.closest('.who'); if (b) show(Number(b.dataset.i)); });
+$('prev').addEventListener('click', () => show(current - 1)); $('next').addEventListener('click', () => show(current + 1));
+document.addEventListener('keydown', (e) => { if (e.key === 'ArrowLeft') { show(current - 1); $(`who-${current}`).focus({ preventScroll: true }); e.preventDefault(); }
+  if (e.key === 'ArrowRight') { show(current + 1); $(`who-${current}`).focus({ preventScroll: true }); e.preventDefault(); } });
+show(current);
+</script>
+</body>
+</html>
