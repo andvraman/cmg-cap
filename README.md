@@ -1,5 +1,6 @@
-# CMG Training: the people
+# CMG Training: system introduction
 
-The eight core people who use the CMG training system, in a procession you can walk through: choose one to see what they do and what success means for them.
+The introductory deck for the CMG training system, and the people who use it.
 
-Open it: https://andvraman.github.io/cmg-cap/personas.html
+- **The deck**: [CMG-Training-system-introduction.pdf](CMG-Training-system-introduction.pdf) (also as [PowerPoint](CMG-Training-system-introduction.pptx))
+- **The people, one at a time**: https://andvraman.github.io/cmg-cap/personas.html — choose a person to see what they do and what success means for them
