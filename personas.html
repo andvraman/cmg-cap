@@ -20,16 +20,16 @@
     --gov: #8CC0D6; --partner: #E69670; --field: #A9C98F; --watch: #E6B25A; --on-c: #0F2530; }
 
   * { box-sizing: border-box; }
-  body { background: var(--ground); color: var(--ink); font-family: var(--body); font-size: 16px; line-height: 1.45; }
-  .page { max-width: 1240px; margin-inline: auto; padding-inline: 24px; padding-block: 28px 20px; display: flex; flex-direction: column; gap: 22px; }
-  .eyebrow { margin: 0; font-size: 13px; font-weight: 800; letter-spacing: .16em; color: var(--partner); }
+  body { background: var(--ground); color: var(--ink); font-family: var(--body); font-size: 14.5px; line-height: 1.45; }
+  .page { max-width: 1120px; margin-inline: auto; padding-inline: 24px; padding-block: 20px 16px; display: flex; flex-direction: column; gap: 16px; }
+  .eyebrow { margin: 0; font-size: 11.5px; font-weight: 800; letter-spacing: .16em; color: var(--partner); }
   .top { display: flex; flex-direction: column; gap: 8px; }
   .top::before { content: ''; width: 64px; height: 5px; border-radius: 3px; background: var(--partner); }
-  h1 { margin: 0; font-family: var(--display); font-size: clamp(28px, 4vw, 44px); line-height: 1.12; font-weight: 700; text-wrap: balance; }
-  .lede { margin: 0; max-width: 65ch; color: var(--ink-2); font-size: 17px; }
+  h1 { margin: 0; font-family: var(--display); font-size: clamp(25px, 3.6vw, 40px); line-height: 1.12; font-weight: 700; text-wrap: balance; }
+  .lede { margin: 0; max-width: 65ch; color: var(--ink-2); font-size: 15px; }
 
   /* ---- the stage: planets round a sun, and the success box beside it ---- */
-  .stage { --c: var(--gov); display: grid; gap: 28px; align-items: center; }
+  .stage { --c: var(--gov); display: grid; gap: 24px; align-items: center; }
   .orbit { display: flex; flex-direction: column; gap: 12px; }
   .orbit svg.rings { display: none; }
   .sun { align-self: flex-start; display: flex; align-items: center; gap: 14px; padding: 14px 22px 14px 16px; border-radius: 999px; background: var(--c); color: var(--on-c); }
@@ -42,42 +42,42 @@
   @keyframes arrive { from { opacity: 0; } to { opacity: 1; } }
 
   @media (min-width: 760px) {
-    .orbit { position: relative; display: block; width: min(100%, 640px); aspect-ratio: 64 / 57; margin-inline: auto; }
+    .orbit { position: relative; display: block; width: min(100%, 576px, (100vh - 400px) * 64 / 57); aspect-ratio: 64 / 57; margin-inline: auto; margin-bottom: 40px; }
     .orbit svg.rings { display: block; position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
     .rings ellipse { fill: none; stroke: var(--line); stroke-width: 2; vector-effect: non-scaling-stroke; }
     .rings .path { stroke: var(--c); stroke-opacity: .55; stroke-dasharray: 3 9; stroke-linecap: round; stroke-width: 3; animation: drift 40s linear infinite; }
     @keyframes drift { to { stroke-dashoffset: -240; } }
     .sun { position: absolute; left: 50%; top: 47%; transform: translate(-50%, -50%); width: 27%; aspect-ratio: 1; flex-direction: column; justify-content: center; gap: 6px; padding: 12px; text-align: center; border-radius: 50%; box-shadow: 0 0 0 10px color-mix(in srgb, var(--c) 16%, transparent), 0 0 0 22px color-mix(in srgb, var(--c) 8%, transparent); }
-    .sun svg { width: 40px; height: 40px; }
-    .sun b { font-size: clamp(15px, 1.7vw, 19px); }
-    .planet { position: absolute; left: var(--x); top: var(--y); transform: translate(-50%, -30px); width: 156px; flex-direction: column; gap: 6px; text-align: center; animation-name: launch; }
-    .planet .ball { width: 60px; height: 60px; }
-    .planet span { font-size: 15px; padding: 2px 6px; border-radius: 8px; background: var(--ground); }
+    .sun svg { width: 36px; height: 36px; }
+    .sun b { font-size: clamp(12px, 1.4vw, 16px); }
+    .planet { position: absolute; left: var(--x); top: var(--y); transform: translate(-50%, -27px); width: 140px; flex-direction: column; gap: 6px; text-align: center; animation-name: launch; }
+    .planet .ball { width: 54px; height: 54px; }
+    .planet span { font-size: 13.5px; padding: 2px 6px; border-radius: 8px; background: var(--ground); }
     @keyframes launch { from { left: 50%; top: 47%; opacity: 0; } to { left: var(--x); top: var(--y); opacity: 1; } }
   }
-  @media (min-width: 1020px) { .stage { grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); } }
+  @media (min-width: 960px) { .stage { grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); } }
 
-  .side { display: flex; flex-direction: column; gap: 16px; min-width: 0; }
-  .side h2 { margin: 0; font-family: var(--display); font-size: clamp(24px, 3vw, 34px); line-height: 1.12; text-wrap: balance; }
+  .side { display: flex; flex-direction: column; gap: 14px; min-width: 0; }
+  .side h2 { margin: 0; font-family: var(--display); font-size: clamp(22px, 2.7vw, 31px); line-height: 1.12; text-wrap: balance; }
   .chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 0; padding: 0; list-style: none; }
-  .chips li { padding: 4px 12px; border-radius: 999px; font-size: 11px; font-weight: 800; letter-spacing: .04em; border: 2px solid var(--c); color: var(--c); }
+  .chips li { padding: 3px 11px; border-radius: 999px; font-size: 10px; font-weight: 800; letter-spacing: .04em; border: 2px solid var(--c); color: var(--c); }
   .chips li:first-child { background: var(--c); color: var(--on-c); }
-  .label { margin: 0 0 4px; font-size: 10.5px; font-weight: 800; letter-spacing: .16em; }
+  .label { margin: 0 0 4px; font-size: 9.5px; font-weight: 800; letter-spacing: .16em; }
   .goal .label { color: var(--ink-2); }
-  .goal p:last-child { margin: 0; font-size: 16px; max-width: 46ch; }
-  .success { padding: 22px 24px; border-radius: 18px; background: var(--c); color: var(--on-c); }
+  .goal p:last-child { margin: 0; font-size: 14.5px; max-width: 46ch; }
+  .success { padding: 18px 22px; border-radius: 16px; background: var(--c); color: var(--on-c); }
   .success .label { opacity: .85; font-size: 9.5px; }
-  .success p.words { margin: 0; font-family: var(--display); font-size: clamp(14px, 1.6vw, 16px); line-height: 1.4; }
+  .success p.words { margin: 0; font-family: var(--display); font-size: clamp(13px, 1.45vw, 14.5px); line-height: 1.4; }
   .success p.note { margin: 10px 0 0; font-size: 11.5px; opacity: .85; }
 
   /* ---- the procession ---- */
-  .strip { position: sticky; bottom: 0; background: var(--panel); border-top: 2px solid var(--line); padding: 10px 12px calc(10px + env(safe-area-inset-bottom, 0px)); }
-  .strip-in { max-width: 1240px; margin-inline: auto; display: flex; align-items: center; gap: 8px; }
+  .strip { position: sticky; bottom: 0; background: var(--panel); border-top: 2px solid var(--line); padding: 6px 12px calc(6px + env(safe-area-inset-bottom, 0px)); }
+  .strip-in { max-width: 1120px; margin-inline: auto; display: flex; align-items: center; gap: 8px; }
   .nudge { flex: none; width: 44px; height: 44px; border-radius: 50%; border: 2px solid var(--ink); background: var(--ground); color: var(--ink); display: grid; place-items: center; cursor: pointer; }
   .nudge svg { width: 22px; height: 22px; }
   .nudge:hover { background: var(--ink); color: var(--ground); }
   .scroller { position: relative; flex: 1; min-width: 0; overflow-x: auto; scroll-snap-type: x proximity; scrollbar-width: thin; scrollbar-color: var(--line) transparent; }
-  .track { position: relative; display: flex; gap: 6px; width: max-content; min-width: 100%; justify-content: space-between; padding: 8px 10px 6px; }
+  .track { position: relative; display: flex; gap: 6px; width: max-content; min-width: 100%; justify-content: space-between; padding: 8px 10px 4px; }
   .track::before { content: ''; position: absolute; left: 0; right: 0; top: 36px; height: 3px; background: var(--line); }
   .who { --c: var(--gov); position: relative; scroll-snap-align: center; width: 136px; padding: 0 4px 4px; border: 0; background: none; color: var(--ink-2); font: inherit; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 6px; }
   .who .disc { width: 58px; height: 58px; border-radius: 50%; display: grid; place-items: center; background: var(--ground); border: 3px solid var(--c); color: var(--c); transition: transform .2s, background .2s, color .2s; }
@@ -89,7 +89,7 @@
   .who[aria-pressed="true"] .name { font-weight: 800; }
   .who[aria-pressed="true"]::after { content: ''; position: absolute; top: -8px; left: 50%; width: 0; height: 0; transform: translateX(-50%); border: 7px solid transparent; border-top: 0; border-bottom-color: var(--c); }
   button:focus-visible { outline: 3px solid var(--watch); outline-offset: 3px; border-radius: 12px; }
-  .legend { max-width: 1240px; margin: 6px auto 0; padding: 0 56px; display: flex; flex-wrap: wrap; gap: 4px 18px; font-size: 13px; color: var(--ink-2); list-style: none; }
+  .legend { max-width: 1120px; margin: 4px auto 0; padding: 0 56px; display: flex; flex-wrap: wrap; gap: 4px 18px; font-size: 13px; color: var(--ink-2); list-style: none; }
   .legend li { display: flex; align-items: center; gap: 6px; }
   .legend i { width: 12px; height: 12px; border-radius: 50%; background: var(--c); }
   @media (max-width: 560px) { .nudge { display: none; } .legend { padding: 0 8px; } .who { width: 112px; } }
