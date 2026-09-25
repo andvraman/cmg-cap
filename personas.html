@@ -103,7 +103,7 @@
   <header class="top">
     <p class="eyebrow">CMG TRAINING · MAFUNZO YA VIKUNDI</p>
     <h1>Who does what</h1>
-    <p class="lede">Eight people carry a lesson from an author's desk to a village meeting and back. They stand below in the order the work reaches them. Choose one to see the few things that matter most in their job, and what success looks like for them.</p>
+    <p class="lede">Nine people carry a lesson from an author's desk to a village meeting and back. They stand below in the order the work reaches them. Choose one to see the few things that matter most in their job, and what success looks like for them.</p>
   </header>
 
   <main class="stage" id="stage" aria-live="polite">
@@ -169,7 +169,7 @@ const ICON = {
 };
 const svg = (n) => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICON[n]}</svg>`;
 
-// From docs/01-personas-and-roles.md: the core eight, their goal, the few things that matter most, and the spec's own success line.
+// From docs/01-personas-and-roles.md: the core nine (the partner manager split in two on 2026-09-25, change request CR-20), their goal, the few things that matter most, and the spec's own success line.
 const PEOPLE = [
   { name: 'Platform administrator', short: 'Administrator', icon: 'key', c: 'gov', chips: ['TAMISEMI', 'National', 'Access control'],
     goal: 'Keep the platform running, control who has access, and see the national picture.',
@@ -183,11 +183,15 @@ const PEOPLE = [
     goal: 'Keep the district’s register of groups true: who exists, where, who leads them, and whether they are registered.',
     does: [['users', 'Adds groups to the platform'], ['checkcircle', 'Records their registration'], ['swap', 'Changes a group’s status'], ['list', 'Keeps the member list'], ['key', 'Issues the chair’s and secretary’s accounts']],
     success: 'When a coordinator wants to train a group, it is already on the platform, registered, in the right ward and village, with a chairperson who can sign.' },
-  { name: 'Delivery partner manager', short: 'Partner manager', icon: 'cap', c: 'partner', chips: ['BDS partner', 'National', 'Runs the trainer workforce'],
-    goal: 'Manage the trainer workforce and demonstrate delivery to the government.',
-    does: [['userplus', 'Registers new trainers'], ['book', 'Enrols them in train-the-trainer'], ['award', 'Certifies the trainers'], ['users', 'Sees workload and certifications'], ['xcircle', 'Sees which reports were rejected, and why']],
+  { name: 'Trainer manager', short: 'Trainer manager', icon: 'cap', c: 'partner', chips: ['BDS partner', 'National', 'Runs the trainer workforce'],
+    goal: 'Keep the trainer workforce ready and deployed: enough trainers, trained, certified and posted where the work is.',
+    does: [['userplus', 'Registers new trainers'], ['book', 'Runs train-the-trainer workshops'], ['award', 'Certifies the trainers'], ['map', 'Posts trainers where the work is'], ['users', 'Sees workload and certifications']],
+    success: 'Every live plan has certified trainers posted to it before its first week starts.' },
+  { name: 'Partner director', short: 'Partner director', icon: 'trend', c: 'partner', chips: ['BDS partner', 'National', 'Accounts for delivery'],
+    goal: 'Lead the partner’s side of the programme, and demonstrate delivery to the government.',
+    does: [['users', 'Appoints the partner’s coordinators'], ['grid', 'Reads delivery by region, district and ward'], ['chart', 'Reads plans and progress'], ['xcircle', 'Sees which reports were rejected, and why'], ['eye', 'Changes nothing it reads']],
     success: 'Can show the government a monthly delivery report per region without asking trainers to compile it by hand.' },
-  { name: 'District coordinator', short: 'The coordinator', icon: 'calendar', c: 'gov', chips: ['TAMISEMI', 'District', '“The coordinator”'],
+  { name: 'District coordinator', short: 'Dist. coordinator', icon: 'calendar', c: 'gov', chips: ['TAMISEMI', 'District', 'Dist. coordinator'],
     goal: 'Get every group in the district trained on the full curriculum, on schedule, by certified trainers.',
     does: [['chart', 'Plans six weeks of visits'], ['calendar', 'Schedules, reschedules, cancels'], ['checkcircle', 'Accepts or rejects reports'], ['map', 'Draws areas, appoints ward coordinators'], ['shield', 'Covers for ward coordinators']],
     success: 'Every group in the district is trained on the full curriculum, on schedule, by certified trainers.' },
@@ -207,7 +211,7 @@ const PEOPLE = [
 
 const $ = (id) => document.getElementById(id);
 const esc = (s) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;');
-let current = 4;                                   // the coordinator: the person the rest of the system turns round
+let current = 5;                                   // the Dist. coordinator: the person the rest of the system turns round
 
 $('track').innerHTML = PEOPLE.map((p, i) =>
   `<button class="who" type="button" id="who-${i}" data-i="${i}" style="--c:var(--${p.c})" aria-pressed="false"><span class="disc">${svg(p.icon)}</span><span class="name">${esc(p.short)}</span></button>`).join('');
