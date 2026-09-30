@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CapBuild Actors & User Stories</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #fafafa; padding: 30px 20px; }
+.container { max-width: 1000px; margin: 0 auto; }
+.carousel { display: flex; gap: 12px; overflow-x: auto; padding: 20px 0; scroll-behavior: smooth; }
+.carousel::-webkit-scrollbar { height: 3px; }
+.carousel::-webkit-scrollbar-thumb { background: #ddd; }
+.card { flex: 0 0 140px; padding: 16px; background: white; border-radius: 8px; text-align: center; cursor: pointer; border: 1px solid #eee; transition: all 0.2s; }
+.card:hover { background: #f9f9f9; }
+.card.active { border: 2px solid; background: white; }
+.icon { font-size: 32px; margin-bottom: 8px; }
+.name { font-size: 13px; font-weight: 600; color: #333; margin-bottom: 4px; }
+.role { font-size: 11px; color: #999; }
+.stories-box { margin-top: 24px; background: white; border-radius: 8px; border: 2px solid #eee; padding: 16px; position: relative; transition: border-color 0.2s; }
+.stories-label { font-size: 12px; font-weight: 600; color: #666; margin-bottom: 14px; text-transform: uppercase; letter-spacing: 0.5px; }
+.scroll-container { position: relative; }
+.stories-scroll { display: flex; gap: 10px; overflow-x: auto; padding: 8px 0; scroll-behavior: smooth; scroll-snap-type: x mandatory; }
+.stories-scroll::-webkit-scrollbar { height: 4px; }
+.stories-scroll::-webkit-scrollbar-track { background: #f0f0f0; border-radius: 2px; }
+.stories-scroll::-webkit-scrollbar-thumb { background: #bbb; border-radius: 2px; }
+.story-tag { flex: 0 0 auto; padding: 12px 16px; background: #f5f5f5; border: 1px solid #e0e0e0; border-radius: 8px; font-size: 12px; color: #555; white-space: nowrap; cursor: pointer; transition: all 0.2s; scroll-snap-align: center; min-height: 56px; display: flex; align-items: center; justify-content: center; text-align: center; }
+.story-tag:hover { background: #f0f0f0; }
+.story-tag.active { color: white; border: none; }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <div class="carousel" id="carousel">
+    <div class="card active" data-actor="0" data-color="#2563eb"><div class="icon">🏛️</div><div class="name">Ward CDO</div><div class="role">Coordinator</div></div>
+    <div class="card" data-actor="1" data-color="#7c3aed"><div class="icon">👨‍🏫</div><div class="name">Trainer</div><div class="role">Deliverer</div></div>
+    <div class="card" data-actor="2" data-color="#059669"><div class="icon">⭐</div><div class="name">Master Trainer</div><div class="role">Mentor</div></div>
+    <div class="card" data-actor="3" data-color="#d97706"><div class="icon">📊</div><div class="name">Trainer Manager</div><div class="role">Manager</div></div>
+    <div class="card" data-actor="4" data-color="#0891b2"><div class="icon">✍️</div><div class="name">Content Author</div><div class="role">Creator</div></div>
+    <div class="card" data-actor="5" data-color="#6366f1"><div class="icon">🗺️</div><div class="name">Regional Coordinator</div><div class="role">Overseer</div></div>
+    <div class="card" data-actor="6" data-color="#e11d48"><div class="icon">🗣️</div><div class="name">Translator</div><div class="role">Localization</div></div>
+    <div class="card" data-actor="7" data-color="#8b5cf6"><div class="icon">🏢</div><div class="name">Partner Director</div><div class="role">Leadership</div></div>
+    <div class="card" data-actor="8" data-color="#c2410c"><div class="icon">📋</div><div class="name">Evaluator</div><div class="role">Monitor</div></div>
+    <div class="card" data-actor="9" data-color="#0369a1"><div class="icon">👥</div><div class="name">CMG Officer</div><div class="role">Learner</div></div>
+  </div>
+
+  <div class="stories-box" id="stories-box" style="border-color: #2563eb;">
+    <div class="stories-label" id="stories-label">Ward CDO</div>
+    <div class="scroll-container">
+      <div class="stories-scroll" id="stories-scroll"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+const colors = ['#2563eb', '#7c3aed', '#059669', '#d97706', '#0891b2', '#6366f1', '#e11d48', '#8b5cf6', '#c2410c', '#0369a1'];
+
+const actors = [
+  {
+    name: 'Ward CDO',
+    stories: ['View training plan', 'Schedule sessions', 'Accept reports', 'Monitor progress', 'Manage cancellations', 'Build/re-plan schedule', 'Review trainer certs', 'Handle spot checks', 'Access performance analytics']
+  },
+  {
+    name: 'Trainer',
+    stories: ['View scheduled work', 'Submit reports', 'Record attendance', 'Take quizzes', 'Receive feedback', 'Deliver in field', 'Print materials', 'View cert status', 'Access curriculum content']
+  },
+  {
+    name: 'Master Trainer',
+    stories: ['Lead workshops', 'Assess competency', 'Track progress', 'Sign off ready', 'Mentor delivery', 'Manage trainer roster', 'Report readiness', 'Document apprenticeships', 'Grade assessments']
+  },
+  {
+    name: 'Trainer Manager',
+    stories: ['Register trainers', 'Grant certs', 'Revoke certs', 'Monitor stats', 'Manage postings', 'Review performance flags', 'Plan trainer capacity', 'Approve exceptions', 'Export trainer reports']
+  },
+  {
+    name: 'Content Author',
+    stories: ['Write modules', 'Submit for review', 'Manage translations', 'View quiz data', 'Publish versions', 'Create parts/sections', 'Upload assets', 'Share for translation', 'Review glossary terms']
+  },
+  {
+    name: 'Regional Coordinator',
+    stories: ['Oversee multiple districts', 'Confirm trainer postings', 'Approve handovers', 'Conduct spot checks', 'Monitor regional stats', 'Manage regional capacity', 'Review district plans', 'Coordinate training waves', 'Handle escalations']
+  },
+  {
+    name: 'Translator',
+    stories: ['Receive translation tasks', 'Translate module content', 'Propose glossary terms', 'Review translations', 'Submit for approval', 'Update based on feedback', 'Translate quizzes', 'Track translation status', 'Manage terminology']
+  },
+  {
+    name: 'Partner Director',
+    stories: ['View partner delivery stats', 'Monitor trainer workforce', 'Review performance reports', 'Approve trainer deactivations', 'Plan trainer deployments', 'Report to donor/funder', 'Manage area handovers', 'Coordinate with government', 'Track budget/capacity']
+  },
+  {
+    name: 'Evaluator',
+    stories: ['Access all session data', 'Review delivery reports', 'Conduct quality checks', 'View group progress', 'Export evaluation data', 'Analyze compliance flags', 'Generate reports', 'Verify signatures', 'Track attendance patterns']
+  },
+  {
+    name: 'CMG Officer',
+    stories: ['View group progress', 'Access training modules', 'Practice with quizzes', 'Track certifications', 'View meeting schedules', 'Download session materials', 'Participate in sessions', 'Review group records', 'Access curriculum content']
+  }
+];
+
+function autoScrollStories(scroll) {
+  const maxScroll = scroll.scrollWidth - scroll.clientWidth;
+  if (maxScroll <= 0) return;
+
+  const duration = 2500;
+  const startTime = Date.now();
+  const startScroll = scroll.scrollLeft;
+  const targetScroll = Math.min(startScroll + 200, maxScroll);
+
+  function animate() {
+    const elapsed = Date.now() - startTime;
+    const progress = Math.min(elapsed / duration, 1);
+
+    scroll.scrollLeft = startScroll + (targetScroll - startScroll) * progress;
+
+    if (progress < 1) {
+      requestAnimationFrame(animate);
+    }
+  }
+
+  animate();
+}
+
+function renderStories(index, color) {
+  const actor = actors[index];
+  document.getElementById('stories-label').textContent = actor.name;
+  document.getElementById('stories-box').style.borderColor = color;
+  const scroll = document.getElementById('stories-scroll');
+  scroll.innerHTML = actor.stories.map((s, i) =>
+    `<div class="story-tag" data-story="${i}" style="background: #f5f5f5;">${s}</div>`
+  ).join('');
+
+  const tags = scroll.querySelectorAll('.story-tag');
+  tags.forEach((tag, i) => {
+    tag.addEventListener('click', () => {
+      tags.forEach(t => {
+        t.classList.remove('active');
+        t.style.background = '#f5f5f5';
+        t.style.color = '#555';
+      });
+      tag.classList.add('active');
+      tag.style.background = '#001f3f';
+      tag.style.color = 'white';
+      tag.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+    });
+  });
+
+  if (tags.length > 0) {
+    tags[0].classList.add('active');
+    tags[0].style.background = '#001f3f';
+    tags[0].style.color = 'white';
+    setTimeout(() => autoScrollStories(scroll), 100);
+  }
+}
+
+document.querySelectorAll('.card').forEach((card, i) => {
+  card.addEventListener('click', () => {
+    document.querySelectorAll('.card').forEach(c => c.classList.remove('active'));
+    card.classList.add('active');
+    const color = colors[i];
+    card.style.borderColor = color;
+    renderStories(i, color);
+  });
+});
+
+document.querySelector('.card.active').style.borderColor = colors[0];
+renderStories(0, colors[0]);
+</script>
+
+</body>
+</html>
