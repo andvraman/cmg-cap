@@ -11,9 +11,9 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
 .carousel { display: flex; gap: 12px; overflow-x: auto; padding: 20px 0; scroll-behavior: smooth; }
 .carousel::-webkit-scrollbar { height: 3px; }
 .carousel::-webkit-scrollbar-thumb { background: #ddd; }
-.card { flex: 0 0 140px; padding: 16px; background: white; border-radius: 8px; text-align: center; cursor: pointer; border: 1px solid #eee; transition: all 0.2s; }
-.card:hover { background: #f9f9f9; }
-.card.active { border: 2px solid; background: white; }
+.card { flex: 0 0 140px; padding: 16px; background: white; border-radius: 8px; text-align: center; cursor: pointer; border: 1px solid #eee; transition: all 0.2s; opacity: 0.5; }
+.card:hover { background: #f9f9f9; opacity: 0.7; }
+.card.active { border: 2px solid; background: white; opacity: 1; }
 .icon { font-size: 32px; margin-bottom: 8px; }
 .name { font-size: 13px; font-weight: 600; color: #333; margin-bottom: 4px; }
 .role { font-size: 11px; color: #999; }
@@ -99,28 +99,6 @@ const actors = [
   }
 ];
 
-function autoScrollStories(scroll) {
-  const maxScroll = scroll.scrollWidth - scroll.clientWidth;
-  if (maxScroll <= 0) return;
-
-  const duration = 2500;
-  const startTime = Date.now();
-  const startScroll = scroll.scrollLeft;
-  const targetScroll = Math.min(startScroll + 200, maxScroll);
-
-  function animate() {
-    const elapsed = Date.now() - startTime;
-    const progress = Math.min(elapsed / duration, 1);
-
-    scroll.scrollLeft = startScroll + (targetScroll - startScroll) * progress;
-
-    if (progress < 1) {
-      requestAnimationFrame(animate);
-    }
-  }
-
-  animate();
-}
 
 function renderStories(index, color) {
   const actor = actors[index];
@@ -150,7 +128,6 @@ function renderStories(index, color) {
     tags[0].classList.add('active');
     tags[0].style.background = '#001f3f';
     tags[0].style.color = 'white';
-    setTimeout(() => autoScrollStories(scroll), 100);
   }
 }
 
